@@ -18,11 +18,11 @@ open NUnit.Framework
 module ``08: Putting the Function into Functional Programming`` = 
     [<Test>]
     let ``01 A function takes one input and produces one output`` () =
-        (fun a -> a + 100) __ |> should equal 2097
+        (fun a -> a + 100) 1997 |> should equal 2097
 
     [<Test>]
     let ``02 The input to a function is a pattern (Part 1).`` () =
-        (fun 7 -> 9) __ |> should equal 9
+        (fun 7 -> 9) 7 |> should equal 9
 
     [<Test>]
     let ``03 The input to a function is a pattern (Part 2).`` () =
@@ -31,17 +31,17 @@ module ``08: Putting the Function into Functional Programming`` =
     [<Test>]
     let ``04 The input to a function is a pattern (Part 3).`` () =
         // remember our record types from AboutRecords.fs ?
-        (fun { Author=k } -> "Author is " + k) __ |> should equal "Author is Plato"
+        (fun { Author=k } -> "Author is " + k)  |> should equal "Author is Plato"
 
     [<Test>]
     let ``05 A function can be bound to a name (Part 1).`` () =
         let one_third = fun ka -> ka / 3
-        __ 21 |> should equal 7
+        one_third 21 |> should equal 7
 
     [<Test>]
     let ``06 A function can be bound to a name (Part 2).`` () =
         let pinky bleh = bleh / 3 // The syntax has changed from Part 1, but the meaning is the same
-        __ 21 |> should equal 7
+        pinky 21 |> should equal 7
 
     [<Test>]
     let ``07 A function can span multiple lines (Part 1).`` () =
@@ -49,14 +49,14 @@ module ``08: Putting the Function into Functional Programming`` =
             let k = "swash" // notice the indentation.
             let b = "buckle" // F# is whitespace-sensitive, so it is important!
             zorro + " likes to " + k + b
-        ) "Zorro the pirate" |> should equal __
+        ) "Zorro the pirate" |> should equal "Zorro the pirate likes to swashbuckle"
 
     [<Test>]
     let ``08 A function can span multiple lines (Part 2).`` () =
         let jorus who =
             let p = 5
             who * p
-        jorus 12 |> should equal __
+        jorus 12 |> should equal 60
 
     [<Test>]
     let ``09 A function can span multiple lines (Part 2, expanded syntax).`` () =
@@ -67,7 +67,7 @@ module ``08: Putting the Function into Functional Programming`` =
                 let p = 5 in
                     who * p
         in
-            jorus 12 |> should equal __
+            jorus 12 |> should equal 60
 
     // The next few are very similar.  Resist the temptation to
     // just fill out values without having any idea about what's
@@ -80,7 +80,7 @@ module ``08: Putting the Function into Functional Programming`` =
         // read the above as: fun love -> (fun hate -> (love - hate))
         let j = i 10
         let k = j 9
-        k |> should equal __
+        k |> should equal 1
 
     [<Test>]
     let ``11 A function can return a function (Part 2).`` () =
@@ -258,7 +258,7 @@ module ``08: Putting the Function into Functional Programming`` =
     (*
         Sometimes you want to force type-resolution to occur at a call-site.
         In a functional language that isn't strongly-typed, this isn't an issue.
-        Because F# is strongly-typed, it can be an issue.
+        Because F# is strongly-typed, it can be an issue.`
     *)
 
     // see: https://msdn.microsoft.com/en-us/library/dd548047.aspx
