@@ -31,7 +31,7 @@ module ``08: Putting the Function into Functional Programming`` =
     [<Test>]
     let ``04 The input to a function is a pattern (Part 3).`` () =
         // remember our record types from AboutRecords.fs ?
-        (fun { Author=k } -> "Author is " + k) _  |> should equal "Author is Plato"
+        (fun { Author=k } -> "Author is " + k) __  |> should equal "Author is Plato"
 
     [<Test>]
     let ``05 A function can be bound to a name (Part 1).`` () =
