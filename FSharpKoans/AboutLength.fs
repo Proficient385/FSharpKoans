@@ -7,12 +7,7 @@ Finding the length of a list.
 Suggestion: before you do the next few files, read through and
 understand this function:
 
-let f xs =
-   let rec innerF xs out =
-      match xs with
-      | [] -> out
-      | _::rest -> innerF rest (1::out)
-   innerF xs []
+
 
 This is one of the idioms that you'll see (and use) again and again.
 
@@ -41,7 +36,12 @@ module ``13: Finding the length of a list`` =
     [<Test>]
     let ``01 Finding the length of a list, the hard way`` () =
         let length (xs : 'a list) : int =
-            xs.Length // write a function to find the length of a list
+            let rec innerF xs count =
+              match xs with
+              | [] -> count
+              | _::rest -> innerF rest (count+1)
+            innerF xs  0  
+            // write a function to find the length of a list
         length [9;8;7] |> should equal 3
         length [] |> should equal 0
         length ["Le Comte de Monte-Cristo"] |> should equal 1

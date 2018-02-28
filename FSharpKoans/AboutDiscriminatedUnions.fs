@@ -33,9 +33,9 @@ module ``10: The Good Kind of Discrimination`` =
         let aDegree = BSc (Linguistics, ComputerScience)
         let anotherDegree = BPharm
         let philosopherKing = Masters Philosophy
-        aDegree |> should be ofType<FILL_ME_IN> 
-        anotherDegree |> should be ofType<FILL_ME_IN> 
-        philosopherKing |> should be ofType<FILL_ME_IN> 
+        aDegree |> should be ofType<UndergraduateDegree> 
+        anotherDegree |> should be ofType<UndergraduateDegree> 
+        philosopherKing |> should be ofType<PostgraduateDegree> 
    
     [<Test>]
     let ``02 Creating & pattern-matching a discriminated union`` () = 
@@ -46,7 +46,7 @@ module ``10: The Good Kind of Discrimination`` =
             | BPharm -> "Meh, it's OK."
             | FILL_ME_IN -> "Money, money, money."
             | FILL_ME_IN -> "A thinker, eh?"
-        randomOpinion __ |> should equal "Good choice!"
+        randomOpinion (BSc (Mathematics, ComputerScience)) |> should equal "Good choice!"
         randomOpinion __ |> should equal "!!SCIENCE!!"
         randomOpinion (BCom (Management, Economics)) |> should equal "Money, money, money."
         randomOpinion (BCom (Linguistics, Management)) |> should equal "Money, money, money."
@@ -60,8 +60,8 @@ module ``10: The Good Kind of Discrimination`` =
 
     [<Test>]
     let ``03 A discriminated union case with associated data is a function`` () =
-        Broken |> should be ofType<FILL_ME_IN>
-        Rented |> should be ofType<FILL_ME_IN>
+        Broken |> should be ofType<int -> EquipmentStatus>
+        Rented |> should be ofType<string-> EquipmentStatus>
 
     type BinaryTree =
     | Empty

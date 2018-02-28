@@ -121,6 +121,6 @@ module ``21: Sequences and Arrays`` =
     let ``05 Arrays are much like lists`` () =
         // Arrays use [| and |], and Lists use [ and ] .
         let oneToFifteen = [| 1..15 |] // <-- WITHOUT using Array.init
-        let a = Array.init 5 __
+        let a = Array.init 5 (fun index -> index+1)
         oneToFifteen |> should equal [|1;2;3;4;5;6;7;8;9;10;11;12;13;14;15|]
         a |> should equal [|1;2;3;4;5|]
