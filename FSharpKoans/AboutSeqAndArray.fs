@@ -88,7 +88,15 @@ module ``21: Sequences and Arrays`` =
         // https://en.wikipedia.org/wiki/Collatz_conjecture#Statement_of_the_problem
         // ... when the sequence reaches 1, stop.
         let hailstone seed =
-            __
+           Seq.unfold (fun state ->
+                match state with
+                | 0 -> None
+                | 1 -> Some(state,1)
+                | _ -> 
+                    match state % 2 with
+                    | 0 -> Some (state, state/2)
+                    | _ -> Some (state, state*3+1)
+            ) seed
         hailstone 6 |> Seq.toList |> should equal [6; 3; 10; 5; 16; 8; 4; 2; 1]
         hailstone 19 |> Seq.toList |> should equal [19; 58; 29; 88; 44; 22; 11; 34; 17; 52; 26; 13; 40; 20; 10; 5; 16; 8; 4; 2; 1]
         hailstone 1 |> Seq.toList |> should equal [1]

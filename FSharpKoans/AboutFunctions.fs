@@ -31,7 +31,7 @@ module ``08: Putting the Function into Functional Programming`` =
     [<Test>]
     let ``04 The input to a function is a pattern (Part 3).`` () =
         // remember our record types from AboutRecords.fs ?
-        (fun { Author=k } -> "Author is " + k) __  |> should equal "Author is Plato"
+        (fun { Author=k } -> "Author is " + k)  {Title="Steelheart"; Author="Plato"; Year =2013} |> should equal "Author is Plato"
 
     [<Test>]
     let ``05 A function can be bound to a name (Part 1).`` () =
@@ -195,8 +195,8 @@ module ``08: Putting the Function into Functional Programming`` =
             | [] -> "All valid."
             | "Thesaurus"::_ -> "A thesaurus isn't a dinosaur!"
             | _::rest -> isValid rest
-        isValid ["Stegosaurus"; "Bambiraptor"] |> should equal __
-        isValid ["Triceratops"; "Thesaurus"; "Tyrannosaurus Rex"] |> should equal __
+        isValid ["Stegosaurus"; "Bambiraptor"] |> should equal "All valid."
+        isValid ["Triceratops"; "Thesaurus"; "Tyrannosaurus Rex"] |> should equal "A thesaurus isn't a dinosaur!"
 
     [<Test>]
     let ``25 Nesting functions`` () =

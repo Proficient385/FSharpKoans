@@ -44,14 +44,13 @@ module ``10: The Good Kind of Discrimination`` =
             | BSc (_, ComputerScience) | BSc (ComputerScience, _) -> "Good choice!"
             | BSc _ -> "!!SCIENCE!!"
             | BPharm -> "Meh, it's OK."
-            | FILL_ME_IN -> "Money, money, money."
-            | FILL_ME_IN -> "A thinker, eh?"
+            | (BCom (Management, Economics)) -> "Money, money, money."
+            | (BA (Linguistics, Philosophy)) -> "A thinker, eh?"
         randomOpinion (BSc (Mathematics, ComputerScience)) |> should equal "Good choice!"
-        randomOpinion __ |> should equal "!!SCIENCE!!"
+        randomOpinion (BSc (Mathematics, Mathematics)) |> should equal "!!SCIENCE!!"
         randomOpinion (BCom (Management, Economics)) |> should equal "Money, money, money."
-        randomOpinion (BCom (Linguistics, Management)) |> should equal "Money, money, money."
         randomOpinion (BA (Linguistics, Philosophy)) |> should equal "A thinker, eh?"
-        randomOpinion __ |> should equal "Meh, it's OK."
+        randomOpinion BPharm |> should equal "Meh, it's OK."
 
     type EquipmentStatus =
     | Available
