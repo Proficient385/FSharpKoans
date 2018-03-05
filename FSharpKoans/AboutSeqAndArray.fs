@@ -91,7 +91,7 @@ module ``21: Sequences and Arrays`` =
            Seq.unfold (fun state ->
                 match state with
                 | 0 -> None
-                | 1 -> Some(state,1)
+                | 1 -> Some(state, state-1)
                 | _ -> 
                     match state % 2 with
                     | 0 -> Some (state, state/2)
@@ -118,8 +118,18 @@ module ``21: Sequences and Arrays`` =
                         | _ -> 3*x+1
                     yield! hailstone result // I'm giving back values taken from a sequence here
             }
-        let rec puffery x =
-            __ // you've seen the 'puffery' function in the previous test, yes?
+        let rec puffery x = 
+            seq {
+                yield x 
+                match String.length x with
+                | 0 -> ()
+                | 1 -> ()
+                | _ ->
+                    let res = x.[..String.length x-2]
+                    yield! puffery res
+            
+            
+            } // you've seen the 'puffery' function in the previous test, yes?
             // Implement that here, using a sequence expression.
         puffery "Whizz!" |> Seq.toList |> should equal ["Whizz!"; "Whizz"; "Whiz"; "Whi"; "Wh"; "W"]
         puffery "ZchelnIk" |> Seq.toList |> should equal ["ZchelnIk"; "ZchelnI"; "Zcheln"; "Zchel"; "Zche"; "Zch"; "Zc"; "Z"]

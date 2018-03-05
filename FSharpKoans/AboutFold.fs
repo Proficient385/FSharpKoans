@@ -63,9 +63,14 @@ module ``17: Welcome to the functional fold`` =
     [<Test>]
     let ``03 Folding, the hard way`` () =
         let fold (f : 'a -> 'b -> 'a) (initialState : 'a) (xs : 'b list) : 'a =
-           __   // write a function to do a fold.
-        fold (+) 0 [1;2;3;4] |> should equal 10
-        fold (*) 2 [1;2;3;4] |> should equal 48
+           let rec fld fnc lst initstate = 
+            match lst with 
+            |[] -> initstate
+            | _::rest -> fld fnc rest (fnc initstate lst.Head)
+            
+           fld f xs initialState                                                                         
+        fold (+) 0 [1;2;3;4] |> should equal 10                                                          
+        fold (*) 2 [1;2;3;4] |> should equal 48                                                          
         fold (fun state item -> sprintf "%s %s" state item) "items:" ["dog"; "cat"; "bat"; "rat"]
         |> should equal "items: dog cat bat rat"
         fold (fun state item -> state + float item + 0.5) 0.8 [1;3;5;7] |> should equal 18.8
